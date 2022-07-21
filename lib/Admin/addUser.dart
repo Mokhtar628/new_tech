@@ -8,7 +8,7 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
-  String dropdownValue = "مخارط بلدي";
+  String dropdownValue =  "المخارط البلدى";
 
   @override
   Widget build(BuildContext context) {
@@ -116,14 +116,14 @@ class _AddUserState extends State<AddUser> {
                         keyboardType: TextInputType.text,
                       ),
                     ),//pass
-/*
+
                     Container(
                       //padding: EdgeInsets.only(left: 44.0),
                       child: DropdownButton<String>(
                         hint:  Text("Select Type",style: TextStyle(color: Colors.white),),
-                        dropdownColor: Colors.purpleAccent,
-                        focusColor: Colors.purpleAccent,
-                        iconEnabledColor: Colors.purpleAccent,
+                        dropdownColor: Color. fromRGBO(39,67,89, 1.0),
+                        focusColor: Color. fromRGBO(39,67,89, 1.0),
+                        iconEnabledColor: Color. fromRGBO(39,67,89, 1.0),
                         value: dropdownValue,
                         icon: Icon(Icons.arrow_drop_down),
                         iconSize: 24,
@@ -131,7 +131,7 @@ class _AddUserState extends State<AddUser> {
                         style: TextStyle(color: Colors.white),
                         underline: Container(
                           height: 1,
-                          color: Colors.purpleAccent,
+                          color: Color. fromRGBO(39,67,89, 1.0),
                         ),
                         onChanged: (String? newValue) {
                           setState(() {
@@ -147,7 +147,9 @@ class _AddUserState extends State<AddUser> {
                         }).toList(),
                       ),
                     ),
-*/
+
+                    SizedBox(height: 15,),
+
                     RaisedButton(
                       onPressed: () {
                         if(controllers.nameCont.text=="" || controllers.passCont.text==""){
@@ -155,7 +157,7 @@ class _AddUserState extends State<AddUser> {
                             InvalidStatement="Please enter all fields!!";
                           });
                         }else{
-                          //usersChild.add(controllers.nameCont.text, controllers.passCont.text,dropdownValue);
+                          usersChild.add(controllers.nameCont.text, controllers.passCont.text,dropdownValue);
                           setState(() {
                             controllers.nameCont.text = "";
                             controllers.passCont.text = "";

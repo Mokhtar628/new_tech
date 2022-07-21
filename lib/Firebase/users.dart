@@ -1,4 +1,4 @@
-/*import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'firebaseParent.dart';
 
 class UsersChild extends FireBaseController{
@@ -11,4 +11,4 @@ class UsersChild extends FireBaseController{
     connection.push().set({'name':name.trim(),'password':pass,'type':type});
   }
 
-}*/
+}
