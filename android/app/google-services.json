@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "413336545448",
+    "project_id": "newtech-ae012",
+    "storage_bucket": "newtech-ae012.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413336545448:android:4358f70620e4f7da0a3a9d",
+        "android_client_info": {
+          "package_name": "com.example.newtech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413336545448-6p134nc9a0pukcuoaetn94sf7uns7k6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyCxwhusyxvdJK6QGjklz4fb0GK8ucnSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413336545448-6p134nc9a0pukcuoaetn94sf7uns7k6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
