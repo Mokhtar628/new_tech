@@ -138,11 +138,7 @@ class _LogInState extends State<LogIn> {
                             InvalidStatement="الرجاء ادخال جميع الحقول";
                           });
                         }else{
-                          if(controllers.nameCont.text.trim()=="Hossam" && controllers.passCont.text=="2801"){
-                            navigator.adminUI(context);
-                          }
-
-                          //CheckUsers(controllers.nameCont.text, controllers.passCont.text,context);
+                          usersChild.CheckUsers(controllers.nameCont.text, controllers.passCont.text,context);
                           setState(() {
                             controllers.nameCont.text="";
                             controllers.passCont.text="";
