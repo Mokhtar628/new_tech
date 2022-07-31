@@ -47,8 +47,6 @@ class _AddProductState extends State<AddProduct> {
           ),// app bar end here --------------------------
 
           body: Container(
-            //padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)/100,
-
             width: double.infinity,
             height: double.infinity,
             child: Padding(
@@ -193,12 +191,15 @@ class _AddProductState extends State<AddProduct> {
 
                       RaisedButton(
                         onPressed: () {
-                          if(controllers.codeCont.text=="" || controllers.rateCont.text=="" || controllers.op_description.text==""){
+                          if(controllers.codeCont.text=="" || controllers.rateCont.text==""){
                             setState(() {
                               InvalidStatement="الرجاء ادخال كل الحقول";
                               validStatement="";
                             });
                           }else{
+                            productsChild.setDepartment(deptDropdownValue);
+                            productsChild.add(this.name, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue);
+
                             setState(() {
                               controllers.codeCont.text="";
                               controllers.rateCont.text="";

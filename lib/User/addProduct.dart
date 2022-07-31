@@ -197,12 +197,15 @@ class _AddProductCState extends State<AddProductC> {
 
                       RaisedButton(
                         onPressed: () {
-                          if(controllers.codeCont.text=="" || controllers.rateCont.text=="" || controllers.op_description.text==""){
+                          if(controllers.codeCont.text=="" || controllers.rateCont.text==""){
                             setState(() {
                               InvalidStatement="الرجاء ادخال كل الحقول";
                               validStatement="";
                             });
                           }else{
+                            productsChild.setDepartment(this.dept);
+                            productsChild.add(workerDropdownValue, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue);
+
                             setState(() {
                               controllers.codeCont.text="";
                               controllers.rateCont.text="";
