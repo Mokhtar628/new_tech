@@ -3,26 +3,27 @@ import 'package:intl/intl.dart';
 
 import '../objects.dart';
 
-class AddProductC extends StatefulWidget {
+class AddProductManager extends StatefulWidget {
   String name = "";
   String dept = "";
 
-  AddProductC(String name, String dept){
+  AddProductManager(String name, String dept){
     this.name=name;
     this.dept = dept;
   }
 
   @override
-  _AddProductCState createState() => _AddProductCState(this.name, this.dept);
+  _AddProductManagerState createState() => _AddProductManagerState(this.name, this.dept);
 }
 
-class _AddProductCState extends State<AddProductC> {
+class _AddProductManagerState extends State<AddProductManager> {
   String name = "";
   String machineDropdownValue =  "A";
   String workerDropdownValue = "momo";
+  String deptDropdownValue =  "التقطيع";
   String dept = "";
 
-  _AddProductCState(String name, String dept){
+  _AddProductManagerState(String name, String dept){
     this.name=name;
     this.dept = dept;
   }
@@ -167,6 +168,37 @@ class _AddProductCState extends State<AddProductC> {
                       Container(
                         //padding: EdgeInsets.only(left: 44.0),
                         child: DropdownButton<String>(
+                          hint:  Text("القسم",style: TextStyle(color: Colors.white),),
+                          dropdownColor: Color. fromRGBO(39,67,89, 1.0),
+                          focusColor: Color. fromRGBO(39,67,89, 1.0),
+                          iconEnabledColor: Color. fromRGBO(39,67,89, 1.0),
+                          value: deptDropdownValue,
+                          icon: Icon(Icons.arrow_drop_down),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: Colors.white),
+                          underline: Container(
+                            height: 1,
+                            color: Color. fromRGBO(39,67,89, 1.0),
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              deptDropdownValue = newValue.toString();
+                            });
+                          },
+                          items: <String>['المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                      Container(
+                        //padding: EdgeInsets.only(left: 44.0),
+                        child: DropdownButton<String>(
                           hint:  Text("اسم الماكينه",style: TextStyle(color: Colors.white),),
                           dropdownColor: Color. fromRGBO(39,67,89, 1.0),
                           focusColor: Color. fromRGBO(39,67,89, 1.0),
@@ -203,8 +235,8 @@ class _AddProductCState extends State<AddProductC> {
                               validStatement="";
                             });
                           }else{
-                            productsChild.setDepartment(this.dept);
-                            productsChild.add(workerDropdownValue, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue, dept);
+                            productsChild.setDepartment(deptDropdownValue);
+                            productsChild.add(workerDropdownValue, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue, this.deptDropdownValue);
 
                             setState(() {
                               controllers.codeCont.text="";

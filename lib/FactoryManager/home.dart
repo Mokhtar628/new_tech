@@ -4,22 +4,26 @@ import '../objects.dart';
 import '../widgets/layout.dart';
 
 
-class Admin extends StatefulWidget {
+class Manager extends StatefulWidget {
   String? name;
+  String? type;
 
-  Admin(String name){
+  Manager(String name, String type){
     this.name=name;
+    this.type = type;
   }
 
   @override
-  _AdminState createState() => _AdminState(name);
+  _ManagerState createState() => _ManagerState(name, type);
 }
 
-class _AdminState extends State<Admin> {
+class _ManagerState extends State<Manager> {
   String? name;
+  String? type;
 
-  _AdminState(String? name){
+  _ManagerState(String? name, String? type){
     this.name=name;
+    this.type=type;
   }
 
   @override
@@ -28,7 +32,7 @@ class _AdminState extends State<Admin> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
 
-        appBar: appBar("Welcome Mr: "+name.toString()),
+        appBar: appBar(" أهلا "+this.name.toString()),
 
         body: Container(
           width: double.infinity,
@@ -38,7 +42,7 @@ class _AdminState extends State<Admin> {
               Container(
                 margin: EdgeInsets.fromLTRB(210, 0, 0, 0),
                 color:Color. fromRGBO(39,67,89, 1.0),
-                child: Text("Admin Field",style: TextStyle(color: Colors.white),),
+                child: Text(this.type.toString(),style: TextStyle(color: Colors.white),),
               ),
               SizedBox(height: 20,),
               Expanded(
@@ -58,10 +62,10 @@ class _AdminState extends State<Admin> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("Add user",style: TextStyle(color: Colors.white,fontSize: 20)),
+                        child: Text("اضافة عامل",style: TextStyle(color: Colors.white,fontSize: 20)),
                       ),
                       onTap: () {
-                        navigator.addUserUI(context);
+                        navigator.addWorkerUI(context);
                       },
                     ),
 
@@ -75,10 +79,10 @@ class _AdminState extends State<Admin> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("View Workers",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                        child: Text("اضافة منتج",style: TextStyle(color: Colors.white,fontSize: 20)),
                       ),
                       onTap: () {
-                        //navigator.viewProductsUI(context);
+                        navigator.addProductManagerUI(context,this.name.toString(),this.type.toString());
                       },
                     ),
 
@@ -92,10 +96,11 @@ class _AdminState extends State<Admin> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("View users",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                        child: Text("عرض العمال",style: TextStyle(color: Colors.white,fontSize: 20,)),
                       ),
                       onTap: () {
-                        navigator.viewUsersUI(context);
+                        navigator.viewWorkerUI(context);
+                        //TODO select which worker to appear
                       },
                     ),
                     InkWell(
@@ -108,12 +113,13 @@ class _AdminState extends State<Admin> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("View departments",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                        child: Text("عرض الاقسام",style: TextStyle(color: Colors.white,fontSize: 20)),
                       ),
                       onTap: () {
-                        navigator.viewAdminDepartmentUI(context);
+                        navigator.viewManagerDepartmentUI(context);
                       },
                     ),
+
 
                   ],
 

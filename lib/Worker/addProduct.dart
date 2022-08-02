@@ -198,7 +198,7 @@ class _AddProductState extends State<AddProduct> {
                             });
                           }else{
                             productsChild.setDepartment(deptDropdownValue);
-                            productsChild.add(this.name, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue);
+                            productsChild.add(this.name, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue, this.deptDropdownValue);
 
                             setState(() {
                               controllers.codeCont.text="";

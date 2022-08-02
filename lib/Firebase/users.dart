@@ -32,6 +32,9 @@ class UsersChild extends FireBaseController{
           navigator.adminUI(context,user.name);
         }else if(user.type=="worker"){
           navigator.addProductUI(context,user.name);
+        }else if(user.type=="manger"){
+          navigator.managerUI(context,user.name,user.type);
+          //Edited
         } else {
           navigator.userUI(context, user.name, user.type);
         }
@@ -51,7 +54,7 @@ class UsersChild extends FireBaseController{
     data.forEach((key, value) {
       user = new Users(value['name'],value['password'],value['type']);
       if(user.name.toLowerCase()==text.trim().toLowerCase()){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchedWorker(value["name"],value["password"])));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchedWorker(value["name"],value["password"],value['type'])));
       }
     });
   }
