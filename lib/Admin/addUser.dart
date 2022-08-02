@@ -138,7 +138,7 @@ class _AddUserState extends State<AddUser> {
                             dropdownValue = newValue.toString();
                           });
                         },
-                        items: <String>['admin','worker' , 'المخارط البلدى', 'مثاقيب النحاس الاصفر','المكابس','الفرايز CNC','المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف']
+                        items: <String>['admin','worker' ,'manger', 'المخارط البلدى', 'مثاقيب النحاس الاصفر','المكابس','الفرايز CNC','المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:newtech/Admin/viewDepartments.dart';
+import 'package:newtech/Admin/viewUsers.dart';
+import 'package:newtech/Departments/departmentDetails.dart';
+import 'package:newtech/FactoryManager/home.dart';
 import '../Admin/addUser.dart';
 import '../Admin/home.dart';
+import '../FactoryManager/addProduct.dart';
+import '../FactoryManager/department.dart';
 import '../User/addProduct.dart';
 import '../User/addWorker.dart';
 import '../User/home.dart';
@@ -33,5 +39,28 @@ class Navigators{
   }
   void addProductCUI(BuildContext context, String name, String dept){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddProductC(name,dept)));
+  }
+
+  void addProductManagerUI(BuildContext context, String name, String dept){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddProductManager(name,dept)));
+  }
+  //Edited..
+  void managerUI(BuildContext context, String name, String type){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Manager(name,type)));
+  }
+  void viewManagerDepartmentUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Department()));
+  }
+
+  void viewDepartmentProductUI(BuildContext context, String dept){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewDepartmentProduct(dept)));
+  }
+
+  void viewAdminDepartmentUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewDepartment()));
+  }
+
+  void viewUsersUI(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
   }
 }

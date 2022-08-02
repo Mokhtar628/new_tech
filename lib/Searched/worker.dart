@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
 class SearchedWorker extends StatefulWidget {
-  String name = "", pass = "";
-  SearchedWorker(String name,String pass){
+  String name = "", pass = "", type = "";
+  SearchedWorker(String name,String pass, String type){
     this.name=name;
     this.pass=pass;
+    this.type=type;
   }
   @override
-  _SearchedWorkerState createState() => _SearchedWorkerState(name,pass);
+  _SearchedWorkerState createState() => _SearchedWorkerState(name,pass,type);
 }
 
 class _SearchedWorkerState extends State<SearchedWorker> {
-  String name = "",pass = "";
-  _SearchedWorkerState(String this.name,String this.pass);
+  String name = "",pass = "", type="";
+  _SearchedWorkerState(String this.name,String this.pass, String this.type);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,6 +60,11 @@ class _SearchedWorkerState extends State<SearchedWorker> {
                                     Row(
                                       children: [
                                         Text("Password : "+pass,style: TextStyle(color: Colors.white),)
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Type : "+type,style: TextStyle(color: Colors.white),)
                                       ],
                                     ),
                                   ],
