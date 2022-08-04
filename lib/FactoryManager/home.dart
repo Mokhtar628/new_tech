@@ -100,7 +100,7 @@ class _ManagerState extends State<Manager> {
                       ),
                       onTap: () {
                         navigator.viewWorkerUI(context);
-                        //TODO select which worker to appear
+                        // TODO select which worker to appear
                       },
                     ),
                     InkWell(
