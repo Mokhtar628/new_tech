@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:intl/intl.dart';
+import 'package:newtech/widgets/layout.dart';
 
 import '../objects.dart';
 
@@ -37,35 +38,7 @@ class _ViewDepartmentProductState extends State<ViewDepartmentProduct> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          titleSpacing: 0,
-          title: TextBox(),
-          actions: <Widget>[
-            RaisedButton(
-              textColor: Colors.white,
-              color: Colors.redAccent,
-              onPressed: () {
-                setState(() {
-                  //productsChild.search(controllers.SearchCont.text,context);
-                });
-              },
-              child: Icon(Icons.search),
-            ),
-          ],
-
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                      Color. fromRGBO(31,52,67, 1.0),
-                      Color. fromRGBO(39,67,89, 1.0),
-                      Color. fromRGBO(48,80,103, 1.0)
-                    ])
-            ),
-          ),
-        ),// app bar end here --------------------------
+        appBar: appBar("المنتج"),// app bar end here --------------------------
 
         body: Container(
           width: double.infinity,
@@ -158,9 +131,9 @@ class TextBox extends StatelessWidget {
       color: Colors.white,
       height: 80,
       child: TextField(
-        controller: controllers.SearchCont,
+        controller: controllers.codeCont,
         decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'Search product',contentPadding: EdgeInsets.fromLTRB(20,0,0,0),),
+        InputDecoration(border: InputBorder.none, hintText: 'بحث عن منتج',contentPadding: EdgeInsets.fromLTRB(20,0,0,0),),
       ),
     );
   }
