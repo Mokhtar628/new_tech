@@ -4,7 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:intl/intl.dart';
 import 'package:newtech/widgets/layout.dart';
 import '../objects.dart';
-
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
 class Department extends StatefulWidget {
@@ -23,6 +23,44 @@ class _DepartmentState extends State<Department> {
     super.initState();
     _ref=FirebaseDatabase.instance.reference().child("products").child(DateFormat("yyyy-MM-dd").format(DateTime.now()));
   }
+
+  DateTime selectedStartDate = DateTime.now();
+  DateTime selectedEndDate = DateTime.now();
+
+  Future<void> _selectedStartDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedStartDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedStartDate) {
+      setState(() {
+        selectedStartDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectedEndDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedEndDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedEndDate) {
+      setState(() {
+        selectedEndDate = picked;
+      });
+    }
+  }
+
+  List<String> getDaysInBetween(DateTime startDate, DateTime endDate) {
+    List<String> days = [];
+    for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+      days.add(DateFormat("yyyy-MM-dd").format(startDate.add(Duration(days: i))));
+    }
+    return days;
+  }
+
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
@@ -43,6 +81,47 @@ class _DepartmentState extends State<Department> {
               return Container();
             }
           }),
+        ),
+
+        drawer: Drawer(
+          child: Container(
+            margin: EdgeInsets.fromLTRB(50,150,0,0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text("${selectedStartDate.toLocal()}".split(' ')[0]),
+                        SizedBox(height: 20.0,),
+                        RaisedButton(
+                          onPressed: () => _selectedStartDate(context),
+                          child: Text('Start date'),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text("${selectedEndDate.toLocal()}".split(' ')[0]),
+                        SizedBox(height: 20.0,),
+                        RaisedButton(
+                          onPressed: () => _selectedEndDate(context),
+                          child: Text('End date'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                RaisedButton(
+                    child: Text("بحث"),
+                    onPressed: (){
+                      navigator.viewDepartmentWithDateUI(context, getDaysInBetween(selectedStartDate,selectedEndDate));
+                    })
+              ],
+            ),
+          ),
         ),
 
 

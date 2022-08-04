@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 
 class ProductsChild extends FireBaseController{
+  Map<String, int> deptWithDate = {};
 
   ProductsChild(DatabaseReference connection){
     this.connection = connection;
@@ -27,6 +28,28 @@ class ProductsChild extends FireBaseController{
     }else{
       connection.update({"rate": (productRate + snapshot.value), "dept": dept});
     }
+  }
+
+  Future<void> getDepartmentsWithRefs(List<Query> refs) async{
+    Map<String, int> retreivedDepts = {};
+
+    for(var ref in refs){
+      var snapshot = await ref.once();
+      if(snapshot.value == null){
+
+      }else{
+        var data = snapshot.value as Map<Object?,Object?>;
+        data.forEach((key, value){
+          var valuesOfDepts = value as Map<Object?,Object?>;
+          if(retreivedDepts.containsKey(key)){
+            retreivedDepts[key.toString()] = int.parse(retreivedDepts[key.toString()].toString()) + int.parse(valuesOfDepts['rate'].toString());
+          }else{
+            retreivedDepts.addAll({key.toString(): int.parse(valuesOfDepts['rate'].toString())});
+          }
+        });
+      }
+    }
+    this.deptWithDate = retreivedDepts;
   }
 
   // Future<void> search(String text,BuildContext context) async{

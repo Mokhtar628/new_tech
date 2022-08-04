@@ -7,6 +7,7 @@ import '../Admin/addUser.dart';
 import '../Admin/home.dart';
 import '../FactoryManager/addProduct.dart';
 import '../FactoryManager/department.dart';
+import '../FactoryManager/departmentWithDate.dart';
 import '../User/addProduct.dart';
 import '../User/addWorker.dart';
 import '../User/home.dart';
@@ -63,4 +64,9 @@ class Navigators{
   void viewUsersUI(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
   }
+
+  void viewDepartmentWithDateUI(BuildContext context, List<String> dates){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DepartmentWithDate(dates)));
+  }
+
 }
