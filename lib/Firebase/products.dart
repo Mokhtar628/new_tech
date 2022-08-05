@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../Searched/products.dart';
+import '../objects.dart';
 import 'firebaseParent.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,7 +31,7 @@ class ProductsChild extends FireBaseController{
     }
   }
 
-  Future<void> getDepartmentsWithRefs(List<Query> refs) async{
+  Future<void> getDepartmentsWithRefs(List<Query> refs,BuildContext context) async{
     Map<String, int> retreivedDepts = {};
 
     for(var ref in refs){
@@ -50,6 +51,7 @@ class ProductsChild extends FireBaseController{
       }
     }
     this.deptWithDate = retreivedDepts;
+    navigator.viewDepartmentWithDateUI(context);
   }
 
   // Future<void> search(String text,BuildContext context) async{

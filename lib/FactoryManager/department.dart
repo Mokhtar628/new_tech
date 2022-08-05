@@ -117,7 +117,13 @@ class _DepartmentState extends State<Department> {
                 RaisedButton(
                     child: Text("بحث"),
                     onPressed: (){
-                      navigator.viewDepartmentWithDateUI(context, getDaysInBetween(selectedStartDate,selectedEndDate));
+                      var dates=getDaysInBetween(selectedStartDate,selectedEndDate);
+                      List<Query> _ref = [];
+                            for(String date in dates){
+                              _ref.add(FirebaseDatabase.instance.reference().child("products").child(date));
+                            }
+                            productsChild.getDepartmentsWithRefs(_ref,context);
+                      //navigator.viewDepartmentWithDateUI(context, getDaysInBetween(selectedStartDate,selectedEndDate));
                     })
               ],
             ),
