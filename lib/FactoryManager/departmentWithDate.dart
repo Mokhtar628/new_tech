@@ -7,16 +7,8 @@ import '../objects.dart';
 
 
 class DepartmentWithDate extends StatefulWidget {
-  List<String> dates = [];
-  List<Query> _ref = [];
 
-  DepartmentWithDate(List<String> dates) {
-    this.dates = dates;
-    for(String date in dates){
-      _ref.add(FirebaseDatabase.instance.reference().child("products").child(date));
-    }
-    productsChild.getDepartmentsWithRefs(_ref);
-  }
+
 
   @override
   _DepartmentWithDateState createState() => _DepartmentWithDateState();

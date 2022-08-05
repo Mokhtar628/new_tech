@@ -65,8 +65,8 @@ class Navigators{
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
   }
 
-  void viewDepartmentWithDateUI(BuildContext context, List<String> dates){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DepartmentWithDate(dates)));
+  void viewDepartmentWithDateUI(BuildContext context){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DepartmentWithDate()));
   }
 
 }
