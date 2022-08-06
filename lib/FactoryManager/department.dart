@@ -4,7 +4,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:intl/intl.dart';
 import 'package:newtech/widgets/layout.dart';
 import '../objects.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
 class Department extends StatefulWidget {
@@ -67,7 +66,7 @@ class _DepartmentState extends State<Department> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appBar("عرض الاقسام"),// app bar end here --------------------------
+        appBar: appBar("عرض الاقسام بتاريخ اليوم"),// app bar end here --------------------------
 
         body: Container(
           width: double.infinity,
@@ -119,11 +118,10 @@ class _DepartmentState extends State<Department> {
                     onPressed: (){
                       var dates=getDaysInBetween(selectedStartDate,selectedEndDate);
                       List<Query> _ref = [];
-                            for(String date in dates){
-                              _ref.add(FirebaseDatabase.instance.reference().child("products").child(date));
-                            }
-                            productsChild.getDepartmentsWithRefs(_ref,context);
-                      //navigator.viewDepartmentWithDateUI(context, getDaysInBetween(selectedStartDate,selectedEndDate));
+                      for(String date in dates){
+                        _ref.add(FirebaseDatabase.instance.reference().child("products").child(date));
+                      }
+                      productsChild.getDepartmentsWithRefs(_ref,context,dates);
                     })
               ],
             ),

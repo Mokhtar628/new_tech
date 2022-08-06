@@ -1,17 +1,18 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:intl/intl.dart';
 import 'package:newtech/widgets/layout.dart';
 import '../objects.dart';
 
 
 class DepartmentWithDate extends StatefulWidget {
+  List<String> dates = [];
 
-
+  DepartmentWithDate(List<String> dates){
+    this.dates = dates;
+  }
 
   @override
-  _DepartmentWithDateState createState() => _DepartmentWithDateState();
+  _DepartmentWithDateState createState() => _DepartmentWithDateState(dates);
 }
 
 
@@ -19,23 +20,31 @@ class DepartmentWithDate extends StatefulWidget {
 
 class _DepartmentWithDateState extends State<DepartmentWithDate> {
 
+  List<String> dates = [];
+
+  _DepartmentWithDateState(List<String> dates){
+    this.dates = dates;
+  }
+
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appBar("عرض الاقسام"),
+        appBar: appBar("عرض الاقسام بالتواريخ المحددة"),
 
         body: Container(
           width: double.infinity,
           height: double.infinity,
 
-          child: Column(
-            children: productsChild.deptWithDate
-                .map((key, value) => MapEntry(key, Text(value.toString())))
-                .values
-                .toList(),
+          child: SingleChildScrollView(
+            child: Column(
+              children: productsChild.deptWithDate
+                  .map((key, value) => MapEntry(key, userWidget(dept: {'dept': key, 'rate': value},context: context, dates: this.dates)))
+                  .values
+                  .toList(),
+            ),
           ),
         ),
 
@@ -46,9 +55,9 @@ class _DepartmentWithDateState extends State<DepartmentWithDate> {
   }
 }
 
-Widget userWidget({Map dept = const {} , required BuildContext context})
+Widget userWidget({Map dept = const {} , required BuildContext context, required List<String> dates})
 {
-  if(true){
+  if(['المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف'].contains(dept['dept'])){
     return Container(
       child: Column(
         children: <Widget>[
@@ -61,7 +70,11 @@ Widget userWidget({Map dept = const {} , required BuildContext context})
                     scrollDirection: Axis.horizontal,
                     child: InkWell(
                       onTap: (){
-                        navigator.viewDepartmentProductUI(context, dept['dept']);
+                        List<Query> refs = [];
+                        for(String date in dates){
+                          refs.add(FirebaseDatabase.instance.reference().child("products").child(date).child(dept['dept']).child("products"));
+                        }
+                        productsChild.getDepartmentsproductsWithRefs(refs,context,dept['dept'],dates);
                       },
                       child: Container(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -103,6 +116,9 @@ Widget userWidget({Map dept = const {} , required BuildContext context})
         ],
       ),
     );
+  }
+  else{
+    return Container();
   }
 }
 

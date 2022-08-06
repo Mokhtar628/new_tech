@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 
 class ProductsChild extends FireBaseController{
   Map<String, int> deptWithDate = {};
+  List< Map<Object?,Object?>> deptProductsWithDate = [];
 
   ProductsChild(DatabaseReference connection){
     this.connection = connection;
@@ -31,7 +32,7 @@ class ProductsChild extends FireBaseController{
     }
   }
 
-  Future<void> getDepartmentsWithRefs(List<Query> refs,BuildContext context) async{
+  Future<void> getDepartmentsWithRefs(List<Query> refs,BuildContext context, List<String> dates) async{
     Map<String, int> retreivedDepts = {};
 
     for(var ref in refs){
@@ -51,8 +52,26 @@ class ProductsChild extends FireBaseController{
       }
     }
     this.deptWithDate = retreivedDepts;
-    navigator.viewDepartmentWithDateUI(context);
+    navigator.viewDepartmentWithDateUI(context,dates);
   }
+
+  Future<void> getDepartmentsproductsWithRefs(List<Query> refs, BuildContext context, String dept, List<String> dates) async{
+    List< Map<Object?,Object?>> retreivedDeptProduct = [];
+
+    for(var ref in refs){
+      var snapshot = await ref.once();
+      if(snapshot.value == null){
+
+      }else{
+        var data = snapshot.value as Map<Object?,Object?>;
+        retreivedDeptProduct.add(data.values.first as  Map<Object?,Object?>);
+      }
+    }
+
+    this.deptProductsWithDate = retreivedDeptProduct;
+    navigator.viewDepartmentProductWithDateUI(context, dept);
+  }
+
 
   // Future<void> search(String text,BuildContext context) async{
   //   final String url = "https://newtech-ae012-default-rtdb.firebaseio.com/products.json";

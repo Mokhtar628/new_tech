@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newtech/Admin/viewDepartments.dart';
 import 'package:newtech/Admin/viewUsers.dart';
 import 'package:newtech/Departments/departmentDetails.dart';
+import 'package:newtech/Departments/viewDepartmentProductWithDate.dart';
 import 'package:newtech/FactoryManager/home.dart';
 import '../Admin/addUser.dart';
 import '../Admin/home.dart';
@@ -13,6 +14,7 @@ import '../User/addWorker.dart';
 import '../User/home.dart';
 import '../User/viewWorker.dart';
 import '../Worker/addProduct.dart';
+
 
 class Navigators{
   void adminUI(BuildContext context, String name){
@@ -65,8 +67,12 @@ class Navigators{
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewUsers()));
   }
 
-  void viewDepartmentWithDateUI(BuildContext context){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DepartmentWithDate()));
+  void viewDepartmentWithDateUI(BuildContext context, List<String> dates){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DepartmentWithDate(dates)));
+  }
+
+  void viewDepartmentProductWithDateUI(BuildContext context, String dept) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewDepartmentProductWithDate(dept)));
   }
 
 }
