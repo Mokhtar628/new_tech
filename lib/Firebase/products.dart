@@ -23,7 +23,7 @@ class ProductsChild extends FireBaseController{
   }
 
   Future<void> add(String name,String productCode,int productRate, String machine, String dept) async {
-    connection.child("products").push().set({'workerName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate, 'machine':machine});
+    connection.child("products").push().set({'workerName':name.trim(),'product_code':productCode.trim(),'production_rate':productRate, 'machine':machine, 'date': DateFormat("yyyy-MM-dd").format(DateTime.now()).toString()});
     var snapshot = await connection.child("rate").once();
     if(snapshot.value == null){
       connection.update({"rate": (productRate), "dept": dept});
@@ -63,11 +63,14 @@ class ProductsChild extends FireBaseController{
       if(snapshot.value == null){
 
       }else{
-        var data = snapshot.value as Map<Object?,Object?>;
-        retreivedDeptProduct.add(data.values.first as  Map<Object?,Object?>);
+        snapshot.value.forEach((key, value){
+          retreivedDeptProduct.add(value as  Map<Object?,Object?>);
+        });
       }
     }
 
+    print("ssssssssssssssssssssssss");
+    print(retreivedDeptProduct);
     this.deptProductsWithDate = retreivedDeptProduct;
     navigator.viewDepartmentProductWithDateUI(context, dept);
   }
@@ -103,13 +106,15 @@ class Products {
   String product_code = "";
   String production_rate = "";
   String workerName = "";
+  String date = "";
 
   Products(String machine, String product_code, String production_rate,
-      String workerName) {
+      String workerName, String date) {
     this.machine = machine;
     this.product_code = product_code;
     this.production_rate = production_rate;
     this.workerName = workerName;
+    this.date = date;
   }
 
 
@@ -120,6 +125,7 @@ class Products {
       'product_code': product_code,
       'production_rate': production_rate,
       'workerName': workerName,
+      'date': date
     };
   }
 }

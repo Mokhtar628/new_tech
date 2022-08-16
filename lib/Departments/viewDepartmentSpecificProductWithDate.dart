@@ -1,53 +1,51 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:intl/intl.dart';
 import 'package:newtech/widgets/layout.dart';
-
 import '../objects.dart';
 
 
 
-class ViewDepartmentProduct extends StatefulWidget {
-  String dept = "";
+class ViewDepartmentSpecificProductWithDate extends StatefulWidget {
+  List< Map<Object?,Object?>> products = [];
 
-  ViewDepartmentProduct(String dept){
-    this.dept = dept;
+  ViewDepartmentSpecificProductWithDate(String productCode){
+    for(var product in productsChild.deptProductsWithDate){
+      if(product['product_code'].toString().toLowerCase() == productCode.toLowerCase()){
+        this.products.add(product);
+      }
+    }
+    controllers.codeCont.text="";
   }
   @override
-  _ViewDepartmentProductState createState() => _ViewDepartmentProductState(dept);
+  _ViewDepartmentSpecificProductWithDateState createState() => _ViewDepartmentSpecificProductWithDateState(products);
 }
 
 
-class _ViewDepartmentProductState extends State<ViewDepartmentProduct> {
-  String dept = "";
+class _ViewDepartmentSpecificProductWithDateState extends State<ViewDepartmentSpecificProductWithDate> {
+  List< Map<Object?,Object?>> products = [];
 
-  _ViewDepartmentProductState(String dept){
-    this.dept = dept;
+  _ViewDepartmentSpecificProductWithDateState(List< Map<Object?,Object?>> products){
+    this.products = products;
+
   }
-  Query _ref = FirebaseDatabase.instance.reference().child("products");
-  @override
-  void initState() {
-    //retrieve();
-    super.initState();
-    _ref=FirebaseDatabase.instance.reference().child("products").child(DateFormat("yyyy-MM-dd").format(DateTime.now())).child(dept).child("products");
-  }
+
+
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appBar("المنتج"),// app bar end here --------------------------
+        appBar: appBar("المنتج المحدد"),// app bar end here --------------------------
 
         body: Container(
-          width: double.infinity,
-          height: double.infinity,
-
-          child: FirebaseAnimatedList(query: _ref,itemBuilder: (BuildContext context ,DataSnapshot snapshot,Animation<double>animation,int index){
-            Map product = snapshot.value;
-            return userWidget(product: product);
-          }),
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                for(var i in this.products) userWidget(product: i)
+              ],
+            ),
+          ),
         ),
 
 
@@ -128,21 +126,6 @@ Widget userWidget({Map product = const {}})
   }
 }
 
-class TextBox extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      color: Colors.white,
-      height: 80,
-      child: TextField(
-        controller: controllers.codeCont,
-        decoration:
-        InputDecoration(border: InputBorder.none, hintText: 'بحث عن منتج',contentPadding: EdgeInsets.fromLTRB(20,0,0,0),),
-      ),
-    );
-  }
-}
 
 
 

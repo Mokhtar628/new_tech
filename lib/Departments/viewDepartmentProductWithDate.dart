@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newtech/Departments/viewDepartmentSpecificProductWithDate.dart';
 import 'package:newtech/widgets/layout.dart';
 import '../objects.dart';
 
@@ -31,7 +32,35 @@ class _ViewDepartmentProductWithDateState extends State<ViewDepartmentProductWit
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: appBar("المنتج"),// app bar end here --------------------------
+        appBar: AppBar(
+          titleSpacing: 0,
+          title: TextBox(),
+          actions: <Widget>[
+            RaisedButton(
+              textColor: Colors.white,
+              color: Colors.redAccent,
+              onPressed: () {
+                setState(() {
+                  navigator.viewDepartmentSpecificProductWithDateUI(context, controllers.codeCont.text);
+                });
+              },
+              child: Icon(Icons.search),
+            ),
+          ],
+
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                      Color. fromRGBO(31,52,67, 1.0),
+                      Color. fromRGBO(39,67,89, 1.0),
+                      Color. fromRGBO(48,80,103, 1.0)
+                    ])
+            ),
+          ),
+        ),// app bar end here --------------------------
 
         body: Container(
           alignment: Alignment.center,
@@ -82,11 +111,6 @@ Widget userWidget({Map product = const {}})
                             children: [
                               Row(
                                 children: [
-                                  Text("Machine : ${product['machine']}",style: TextStyle(color: Colors.white),)
-                                ],
-                              ),
-                              Row(
-                                children: [
                                   Text("Product code : ${product['product_code']}",style: TextStyle(color: Colors.white),)
                                 ],
                               ),
@@ -97,7 +121,17 @@ Widget userWidget({Map product = const {}})
                               ),
                               Row(
                                 children: [
+                                  Text("Machine : ${product['machine']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
                                   Text("Worker: ${product['workerName']}",style: TextStyle(color: Colors.white),)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("date: ${product['date']}",style: TextStyle(color: Colors.white),)
                                 ],
                               ),
                             ],

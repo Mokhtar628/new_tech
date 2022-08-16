@@ -6,6 +6,7 @@ import 'package:newtech/Departments/viewDepartmentProductWithDate.dart';
 import 'package:newtech/FactoryManager/home.dart';
 import '../Admin/addUser.dart';
 import '../Admin/home.dart';
+import '../Departments/viewDepartmentSpecificProductWithDate.dart';
 import '../FactoryManager/addProduct.dart';
 import '../FactoryManager/department.dart';
 import '../FactoryManager/departmentWithDate.dart';
@@ -73,6 +74,10 @@ class Navigators{
 
   void viewDepartmentProductWithDateUI(BuildContext context, String dept) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewDepartmentProductWithDate(dept)));
+  }
+
+  void viewDepartmentSpecificProductWithDateUI(BuildContext context, String productCode) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewDepartmentSpecificProductWithDate(productCode)));
   }
 
 }
