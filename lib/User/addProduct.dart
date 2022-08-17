@@ -18,7 +18,7 @@ class AddProductC extends StatefulWidget {
 
 class _AddProductCState extends State<AddProductC> {
   String name = "";
-  String machineDropdownValue =  "A";
+  String machineDropdownValue =  "خط التكويع اليدوي";
   String workerDropdownValue = "momo";
   String dept = "";
 
@@ -185,7 +185,7 @@ class _AddProductCState extends State<AddProductC> {
                               machineDropdownValue = newValue.toString();
                             });
                           },
-                          items: <String>['A','B','C','D']
+                          items: <String>['ماكينة تقطيع رقم 1 single','ماكينة تقطيع رقم 2 double','ماكينة تكويع multifunction','خط التكويع اليدوي']
                               .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -205,6 +205,7 @@ class _AddProductCState extends State<AddProductC> {
                           }else{
                             productsChild.setDepartment(this.dept);
                             productsChild.add(workerDropdownValue, controllers.codeCont.text, int.parse(controllers.rateCont.text), machineDropdownValue, dept);
+                            machineChild.add(machineDropdownValue, int.parse(controllers.rateCont.text));
 
                             setState(() {
                               controllers.codeCont.text="";

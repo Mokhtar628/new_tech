@@ -75,29 +75,6 @@ class ProductsChild extends FireBaseController{
     navigator.viewDepartmentProductWithDateUI(context, dept);
   }
 
-
-  // Future<void> search(String text,BuildContext context) async{
-  //   final String url = "https://newtech-ae012-default-rtdb.firebaseio.com/products.json";
-  //   final http.Response res = await http.get(url);
-  //   final data = json.decode(res.body) as Map<String, dynamic>;
-  //   print("text is"+text);
-  //   Products products;
-  //   data.forEach((key, value) {
-  //     products =  Products(
-  //        value["machine"],
-  //        value["product_code"] ,
-  //        value["production_rate"],
-  //        value['workerName'],
-  //     );
-  //     print("is are");
-  //     if(products.product_code.toLowerCase() == text.trim().toLowerCase()){
-  //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => searchedProduct(value["machine"],value["product_code"],value["production_rate"],value["workerName"])));
-  //     }
-  //   });
-  // }
-
-
-
 }
 
 
