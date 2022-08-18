@@ -1,12 +1,16 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
+import '../objects.dart';
 import 'firebaseParent.dart';
 import 'package:http/http.dart' as http;
 
 
 class MachineChild extends FireBaseController{
+  Map<String, int> machinesWithDate = {};
+
   MachineChild(DatabaseReference connection){
     this.connection = connection;
   }
@@ -46,5 +50,28 @@ class MachineChild extends FireBaseController{
       "name": machineName,
       "rate": valueRate + rate
     }));
+  }
+
+  Future<void> getMachinesWithRefs(List<Query> refs, BuildContext context, List<String> dates) async {
+    Map<String, int> retreivedMachines = {};
+
+    for(var ref in refs){
+      var snapshot = await ref.once();
+      if(snapshot.value == null){
+
+      }else{
+        var data = snapshot.value as Map<Object?,Object?>;
+        data.forEach((key, value){
+          var valuesOfMachines = value as Map<Object?,Object?>;
+          if(retreivedMachines.containsKey(valuesOfMachines['name'])){
+            retreivedMachines[valuesOfMachines['name'].toString()] = int.parse(retreivedMachines[valuesOfMachines['name'].toString()].toString()) + int.parse(valuesOfMachines['rate'].toString());
+          }else{
+            retreivedMachines.addAll({valuesOfMachines['name'].toString(): int.parse(valuesOfMachines['rate'].toString())});
+          }
+        });
+      }
+    }
+    this.machinesWithDate = retreivedMachines;
+    navigator.viewMachinesWithDateUI(context);
   }
 }

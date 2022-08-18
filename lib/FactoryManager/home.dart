@@ -119,6 +119,22 @@ class _ManagerState extends State<Manager> {
                       },
                     ),
 
+                    InkWell(
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Color. fromRGBO(39,67,89, 1.0),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(color: Colors.white,spreadRadius: 0.5),
+                          ],
+                        ),
+                        child: Text("عرض الماكينات",style: TextStyle(color: Colors.white,fontSize: 20)),
+                      ),
+                      onTap: () {
+                        navigator.viewMachinesUI(context);
+                      },
+                    ),
 
                   ],
 
