@@ -96,10 +96,10 @@ class _UserState extends State<User> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("عرض العمال",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                        child: Text("عرض تفاصيل القسم",style: TextStyle(color: Colors.white,fontSize: 20,)),
                       ),
                       onTap: () {
-                        navigator.viewWorkerUI(context);
+                        navigator.viewDeptDetailsUI(context, this.type.toString());
                       },
                     ),
 

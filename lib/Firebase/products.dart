@@ -68,11 +68,33 @@ class ProductsChild extends FireBaseController{
         });
       }
     }
-
-    print("ssssssssssssssssssssssss");
-    print(retreivedDeptProduct);
     this.deptProductsWithDate = retreivedDeptProduct;
     navigator.viewDepartmentProductWithDateUI(context, dept);
+  }
+
+  Future<void> getSpecificDepartmentWithRefs(List<Query> refs, BuildContext context, List<String> dates, String deptName) async {
+    List<Map<String, int>> retreivedDepts = [];
+    Map<String, int> finalData = {};
+
+    for(var ref in refs){
+      var snapshot = await ref.once();
+      if(snapshot.value != null){
+        if(snapshot.value.containsKey(deptName)){
+          var data = snapshot.value[deptName] as Map<Object?,Object?>;
+          retreivedDepts.add({data['dept'].toString(): int.parse(data['rate'].toString())});
+        }else{
+        }
+      }
+    }
+    for(var map in retreivedDepts){
+      if(finalData.containsKey(deptName)){
+        finalData.update(deptName, (value) => int.parse(map[deptName].toString())+int.parse(finalData[deptName].toString()));
+      }else{
+        finalData.addAll({deptName: int.parse(map[deptName].toString())});
+      }
+    }
+    this.deptWithDate = finalData;
+    navigator.viewDepartmentWithDateUI(context,dates);
   }
 
 }

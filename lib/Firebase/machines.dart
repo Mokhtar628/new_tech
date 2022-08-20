@@ -23,7 +23,6 @@ class MachineChild extends FireBaseController{
     connection.once().then((DataSnapshot snapshot){
       if(snapshot.value == null){
         connection.push().set({'name': machineName,'rate': rate});
-        print("pushed from 21");
         isUpdated = true;
       }else{
       snapshot.value.forEach((key,values) {
@@ -32,13 +31,11 @@ class MachineChild extends FireBaseController{
           final String url = "https://newtech-ae012-default-rtdb.firebaseio.com/machines/${DateFormat("yyyy-MM-dd").format(DateTime.now())}/machines/$id.json";
           update(url, machineName, values['rate'], rate);
           isUpdated = true;
-          print("Is updated = " + isUpdated.toString());
           return;
         }
       });
     }
     if(!isUpdated){
-      print("pushed from 41");
       connection.push().set({'name': machineName,'rate': rate});
       isUpdated = false;
     }

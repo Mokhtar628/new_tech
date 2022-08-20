@@ -15,6 +15,7 @@ import '../Machines/viewMachines.dart';
 import '../User/addProduct.dart';
 import '../User/addWorker.dart';
 import '../User/home.dart';
+import '../User/viewSpecificDepartmentDetails.dart';
 import '../User/viewWorker.dart';
 import '../Worker/addProduct.dart';
 
@@ -88,6 +89,10 @@ class Navigators{
 
   void viewMachinesWithDateUI(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => MachinesWithDate()));
+  }
+
+  void viewDeptDetailsUI(BuildContext context, String type) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewSpecificDepartmentDetails(type)));
   }
 
 }

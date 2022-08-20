@@ -37,8 +37,6 @@ class _MachinesWithDateState extends State<MachinesWithDate> {
           ),
         ),
 
-
-
       ),
     );
   }
