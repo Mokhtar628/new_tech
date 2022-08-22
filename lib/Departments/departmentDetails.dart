@@ -67,7 +67,7 @@ Widget userWidget({Map product = const {}})
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Container(
@@ -117,7 +117,7 @@ Widget userWidget({Map product = const {}})
                       ),
                     ),
                   ),
-                  SizedBox(height: 12,),
+                  SizedBox(height: 4,),
                 ],
               ),
             ),

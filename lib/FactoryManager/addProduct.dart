@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../Machines/dropdownmenuReqs.dart';
 import '../objects.dart';
 
 class AddProductManager extends StatefulWidget {
@@ -22,6 +23,9 @@ class _AddProductManagerState extends State<AddProductManager> {
   String workerDropdownValue = "momo";
   String deptDropdownValue =  "التقطيع";
   String dept = "";
+  //<String>['ماكينة تقطيع رقم 1 single','ماكينة تقطيع رقم 2 double','ماكينة تكويع multifunction','خط التكويع اليدوي']
+  //
+  //
 
   _AddProductManagerState(String name, String dept){
     this.name=name;
@@ -186,8 +190,7 @@ class _AddProductManagerState extends State<AddProductManager> {
                               deptDropdownValue = newValue.toString();
                             });
                           },
-                          items: <String>['المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف'].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -217,11 +220,13 @@ class _AddProductManagerState extends State<AddProductManager> {
                               machineDropdownValue = newValue.toString();
                             });
                           },
-                          items: <String>['ماكينة تقطيع رقم 1 single','ماكينة تقطيع رقم 2 double','ماكينة تكويع multifunction','خط التكويع اليدوي']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: items.map((value) {
                             return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                                enabled: value.type == 'sep' ? false : true,
+                                value: value.name,
+                                child: value.type == 'data'
+                                    ? Text(value.name)
+                                    : DropdownMenuItemSeparator(name: value.name)
                             );
                           }).toList(),
                         ),

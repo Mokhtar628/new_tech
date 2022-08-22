@@ -84,7 +84,7 @@ Widget userWidget({Map emp = const {}})
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
@@ -95,7 +95,7 @@ Widget userWidget({Map emp = const {}})
                         gradient: LinearGradient(colors: [Color. fromRGBO(31,52,67, 1.0),
                           Color. fromRGBO(39,67,89, 1.0),
                           Color. fromRGBO(48,80,103, 1.0)]),
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -124,7 +124,7 @@ Widget userWidget({Map emp = const {}})
                     ),
                   ),
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 4,),
               ],
             ),
           ),

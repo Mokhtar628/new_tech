@@ -75,10 +75,10 @@ class _AdminState extends State<Admin> {
                             BoxShadow(color: Colors.white,spreadRadius: 0.5),
                           ],
                         ),
-                        child: Text("View Workers",style: TextStyle(color: Colors.white,fontSize: 20,)),
+                        child: Text("View machines",style: TextStyle(color: Colors.white,fontSize: 20,)),
                       ),
                       onTap: () {
-                        //navigator.viewProductsUI(context);
+                        navigator.viewMachinesUI(context);
                       },
                     ),
 

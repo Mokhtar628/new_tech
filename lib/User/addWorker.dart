@@ -40,7 +40,7 @@ class _AddWorkerState extends State<AddWorker> {
           height: double.infinity,
 
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(40, 130, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
             child: SingleChildScrollView(
 
               child: Container(
