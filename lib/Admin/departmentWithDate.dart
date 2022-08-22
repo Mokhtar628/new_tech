@@ -4,25 +4,25 @@ import 'package:newtech/widgets/layout.dart';
 import '../objects.dart';
 
 
-class DepartmentWithDate extends StatefulWidget {
+class AllDepartmentWithDate extends StatefulWidget {
   List<String> dates = [];
 
-  DepartmentWithDate(List<String> dates){
+  AllDepartmentWithDate(List<String> dates){
     this.dates = dates;
   }
 
   @override
-  _DepartmentWithDateState createState() => _DepartmentWithDateState(dates);
+  _AllDepartmentWithDateState createState() => _AllDepartmentWithDateState(dates);
 }
 
 
 
 
-class _DepartmentWithDateState extends State<DepartmentWithDate> {
+class _AllDepartmentWithDateState extends State<AllDepartmentWithDate> {
 
   List<String> dates = [];
 
-  _DepartmentWithDateState(List<String> dates){
+  _AllDepartmentWithDateState(List<String> dates){
     this.dates = dates;
   }
 
@@ -57,7 +57,7 @@ class _DepartmentWithDateState extends State<DepartmentWithDate> {
 
 Widget userWidget({Map dept = const {} , required BuildContext context, required List<String> dates})
 {
-  if(['المخزن الفرعى','التقطيع','التكويع اليدوي','التكويع CNC','مثاقيب النحاس الاحمر','لحام الاكسيجين','لحام الكهرباء','الفرز والتعبئة والتغليف'].contains(dept['dept'])){
+  if(true){
     return Container(
       child: Column(
         children: <Widget>[

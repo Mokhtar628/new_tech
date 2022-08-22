@@ -17,6 +17,7 @@ class ViewMachines extends StatefulWidget {
 
 class _ViewMachinesState extends State<ViewMachines> {
   Query _ref = FirebaseDatabase.instance.reference().child("machines").child(DateFormat("yyyy-MM-dd").format(DateTime.now())).child("machines");
+  var loading = false;
   @override
   void initState() {
     super.initState();
@@ -110,8 +111,26 @@ class _ViewMachinesState extends State<ViewMachines> {
                   ],
                 ),
                 RaisedButton(
-                    child: Text("بحث"),
+                    child: SizedBox(
+                      width: 70,
+                      child: Row(
+                        children: [
+                          Text("بحث"),
+                          SizedBox(width: 10,),
+                          if(loading) SizedBox(width:15,height: 15, child: CircularProgressIndicator())
+                        ],
+                      ),
+                    ),
                     onPressed: (){
+                      setState(() {
+                        loading = true;
+                      });
+                      Future.delayed(const Duration(seconds: 6), () {
+                        setState(() {
+                          loading = false;
+                        });
+                      });
+
                       var dates=getDaysInBetween(selectedStartDate,selectedEndDate);
                       List<Query> _ref = [];
                       for(String date in dates){
@@ -139,7 +158,7 @@ Widget userWidget({Map machine = const {}})
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Container(
@@ -150,7 +169,7 @@ Widget userWidget({Map machine = const {}})
                         gradient: LinearGradient(colors: [Color. fromRGBO(31,52,67, 1.0),
                           Color. fromRGBO(39,67,89, 1.0),
                           Color. fromRGBO(48,80,103, 1.0)]),
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -174,7 +193,7 @@ Widget userWidget({Map machine = const {}})
                     ),
                   ),
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 4,),
               ],
             ),
           ),

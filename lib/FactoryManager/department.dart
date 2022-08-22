@@ -16,6 +16,8 @@ class Department extends StatefulWidget {
 
 class _DepartmentState extends State<Department> {
   Query _ref = FirebaseDatabase.instance.reference().child("products");
+  var loading = false;
+
   @override
   void initState() {
     //retrieve();
@@ -114,8 +116,25 @@ class _DepartmentState extends State<Department> {
                   ],
                 ),
                 RaisedButton(
-                    child: Text("بحث"),
+                    child: SizedBox(
+                      width: 70,
+                      child: Row(
+                        children: [
+                          Text("بحث"),
+                          SizedBox(width: 10,),
+                          if(loading) SizedBox(width:15,height: 15, child: CircularProgressIndicator())
+                        ],
+                      ),
+                    ),
                     onPressed: (){
+                      setState(() {
+                        loading = true;
+                      });
+                      Future.delayed(const Duration(seconds: 6), () {
+                        setState(() {
+                          loading = false;
+                        });
+                      });
                       var dates=getDaysInBetween(selectedStartDate,selectedEndDate);
                       List<Query> _ref = [];
                       for(String date in dates){
@@ -144,7 +163,7 @@ Widget userWidget({Map dept = const {} , required BuildContext context})
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: InkWell(
@@ -159,7 +178,7 @@ Widget userWidget({Map dept = const {} , required BuildContext context})
                           gradient: LinearGradient(colors: [Color. fromRGBO(31,52,67, 1.0),
                             Color. fromRGBO(39,67,89, 1.0),
                             Color. fromRGBO(48,80,103, 1.0)]),
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -184,7 +203,7 @@ Widget userWidget({Map dept = const {} , required BuildContext context})
                     ),
                   ),
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 4,),
               ],
             ),
           ),

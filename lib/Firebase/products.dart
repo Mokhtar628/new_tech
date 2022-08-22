@@ -97,6 +97,29 @@ class ProductsChild extends FireBaseController{
     navigator.viewDepartmentWithDateUI(context,dates);
   }
 
+  Future<void> getAllDepartmentsWithRefs(List<Query> refs, BuildContext context, List<String> dates) async {
+    Map<String, int> retreivedDepts = {};
+
+    for(var ref in refs){
+      var snapshot = await ref.once();
+      if(snapshot.value == null){
+
+      }else{
+        var data = snapshot.value as Map<Object?,Object?>;
+        data.forEach((key, value){
+          var valuesOfDepts = value as Map<Object?,Object?>;
+          if(retreivedDepts.containsKey(key)){
+            retreivedDepts[key.toString()] = int.parse(retreivedDepts[key.toString()].toString()) + int.parse(valuesOfDepts['rate'].toString());
+          }else{
+            retreivedDepts.addAll({key.toString(): int.parse(valuesOfDepts['rate'].toString())});
+          }
+        });
+      }
+    }
+    this.deptWithDate = retreivedDepts;
+    navigator.viewAllDepartmentWithDateUI(context,dates);
+  }
+
 }
 
 
